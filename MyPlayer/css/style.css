@@ -1,11 +1,3 @@
-/**{ 
--webkit-filter: grayscale(100%); 
--moz-filter: grayscale(100%); 
--ms-filter: grayscale(100%); 
--o-filter: grayscale(100%); 
-filter: grayscale(100%); 
-filter: gray; 
-} */
 body,div,ul,li,a,i,span{
     padding: 0;
     margin: 0;
@@ -71,7 +63,6 @@ to{-o-transform:rotate(360deg)}
     position: relative;
     background-color:#ccc;
 
-
 }
 #player .control-tab{
     width: 600px;
@@ -131,12 +122,12 @@ to{-o-transform:rotate(360deg)}
     width: 600px;
     height: 350px;
     position: relative;
-    -webkit-filter: grayscale(100%); 
+/*    -webkit-filter: grayscale(100%); 
     -moz-filter: grayscale(100%); 
     -ms-filter: grayscale(100%); 
     -o-filter: grayscale(100%); 
     filter: grayscale(100%); 
-    filter: gray;
+    filter: gray;*/
     overflow: hidden;
 }
 #player .control-tab .main .cover{
@@ -293,7 +284,7 @@ to{-o-transform:rotate(360deg)}
 
 #player .lrc-ct .song-name{
   font-family:Arial,'Times New Roman','Microsoft YaHei',SimHei;
-  background: #333;
+  /*background: #333;*/
   color: white;
   text-align: center;
   width: 100%;
@@ -302,7 +293,7 @@ to{-o-transform:rotate(360deg)}
 }
 #player .lrc-ct .song-artist{
   font-family:Arial,'Times New Roman','Microsoft YaHei',SimHei;
-  background: #333;
+ /* background: #333;*/
   color: white;
   text-align: center;
   width: 83%;
