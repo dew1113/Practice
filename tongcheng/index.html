@@ -1,0 +1,3493 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>同程旅游</title>
+<link rel="stylesheet" type="text/css" href="style/public.css">
+<link rel="stylesheet" type="text/css" href="style/index.css">
+<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	//顶部信息效果
+	$('#index-top .index-top-right ul>li').hover(function(){
+		$(this).toggleClass('hover').children('.details').finish().slideToggle(100);
+	
+	});
+	
+	//搜索信息效果
+	
+	$('#index-seek .wrap .nowCity').hover(function(){
+	    $(this).toggleClass('hover');
+	});
+	
+	//水平导航效果
+	$('#index-navWrap ul.nav>li').hover(function(){
+		$(this).toggleClass('hover');
+		
+	})
+	
+	//幻灯效果开始
+	
+	var slideNum=$('#index-slideWrap ul.slide>li').length;  //页码数量以及幻灯数量
+	var slideNumHtml='<ul class="num">';    //生成 <ul class="num"><li>1</li></ul> 
+	for(var i=1;i<=slideNum;i++){
+		slideNumHtml+='<li>'+i+'</li>';
+	}
+	slideNumHtml+='</ul>';
+	
+	$('#index-slideWrap ul.slide').after(slideNumHtml);  //给ul.slide添加兄弟元素 ul.num
+	
+	function showSlide(num){
+		if(num==$('#index-slideWrap ul.num>li').index($('#index-slideWrap ul.num>li.current'))){
+			return null;
+		}
+		
+		$('#index-slideWrap ul.slide>li')
+		.finish()
+		.filter(':visible')
+		.fadeOut()
+		.css({'z-index':0})
+		.end()
+		.eq(num)
+		.fadeIn()
+		.css({'z-index':1});
+		
+		
+		$('#index-slideWrap ul.num>li')
+		.filter('.current')
+		.removeClass('current')
+		.end()
+		.eq(num)
+		.addClass('current');	
+	};
+	showSlide(0);
+	
+	$('#index-slideWrap ul.num>li').on('mouseenter.trigger',function(){
+		showSlide($('#index-slideWrap ul.num>li').index(this));
+	});
+	
+	
+	var isRun=true;
+	
+	$('#index-slideWrap ul.num>li').hover(function(){
+		isRun=false;
+	},function(){
+		isRun=true;
+	});
+	
+	
+	$('#index-slideWrap ul.slide').hover(function(){
+		isRun=false;
+	},function(){
+		isRun=true;
+	});
+	
+	
+	setInterval(function(){
+		if(isRun){
+			   if($('#index-slideWrap ul.num>li.current').next().length==0){
+				  $('#index-slideWrap ul.num>li').eq(0).triggerHandler('mouseenter.trigger');
+			   }else{
+				  $('#index-slideWrap ul.num>li.current').next().triggerHandler('mouseenter.trigger');	
+			   };	
+		}
+		  
+  },2000);
+  
+  //幻灯效果结束
+  
+  
+  //左侧导航效果
+  $('#index-leftNav ul.nav>li').click(function(){
+	  $('#index-leftNav ul.nav>li').removeClass('current');
+	  $(this).addClass('current'); 
+  })
+  
+  
+  
+  //每日特惠效果
+    //左边效果
+  $('#index-favorable div.favorable-left>ul>li').hover(function(){
+	  $(this).find('h4').css({height:44});
+	  $(this).children('div.text')
+	  .finish()
+	  .css({opacity:0.4})
+	  .animate({opacity:1,height:75},400)
+  },function(){
+	  $(this).find('h4').css({height:24});
+	  $(this).children('div.text').finish().animate({height:55}) 
+  });
+    
+    //右边效果
+   $('#index-favorable div.favorable-right div.imgDescribe').hover(function(){
+	   $(this).children('img.towCode').finish().animate({top:0},200);
+	},function(){
+	   $(this).children('img.towCode').finish().animate({top:196},200);
+		
+	})
+  
+	
+	//同程旅游节效果
+	$('#index-Project div.wrap ul.hottab>li').click(function(){
+		var _iNow=$(this).index(); //获得当前索引值
+		$('#index-Project div.wrap ul.hottab>li').removeClass('click');
+		$(this).addClass('click');
+		
+		$('#index-Project div.imgBlock').removeClass('show');
+		$('#index-Project div.imgBlock').eq(_iNow).addClass('show');
+	});
+	
+	//出境游效果
+	$('#index-outboundTravel div.info-right ul.hottab>li').click(function(){
+		var _iNow=$(this).index(); //获得当前索引值
+		$('#index-outboundTravel div.info-right ul.hottab>li').removeClass('click');
+		$(this).addClass('click');
+		
+		$('#index-outboundTravel div.imgBlock').removeClass('show');
+		$('#index-outboundTravel div.imgBlock').eq(_iNow).addClass('show');
+	});
+	
+	//小红人消失效果
+    $('#redPeople a.close').on('click',function(){
+        $('#redPeople').fadeOut();
+    });
+	
+	//向上效果
+	$('#goTop').click(function(){
+        $('html,body').animate({
+            'scrollTop':0 
+        });
+    });
+	
+	$(window).on('scroll',function(){
+        if($(window).scrollTop()>1000){
+            $('#goTop').show();
+        }else{
+            $('#goTop').hide();
+        }
+    });
+  
+	
+	
+} )
+</script>
+</head>
+<body class="w1190">
+    <script type="text/javascript" src=js/ini.js></script>
+       
+</body>
+<html>
+<!--顶部信息-->
+<div id="index-top">
+   <div class="wrap">
+        <div class="index-top-left">
+            <span class="character"><a href="#">您好，欢迎使用LY.com访问同程！</a></span>
+            <span class="character enter"><a href="#">登录</a></span>
+            <span class="character enroll"><a href="#">注册</a></span>          
+        </div>
+        <div class="index-top-right">
+           <ul class="clearfix ">
+                    <a class="top-right-pic" href="#"><img src="images/index-top-right.gif"></a>
+                    
+                    <li class="top-right-web">
+                       <div class="webname">
+                        <a href="#" class="text">我的同程</a>
+                        <span class="icon"></span>
+                       </div>
+                       
+                       <div class="details">
+                          <div class="details-top clearfix">
+                              <div class="details-top-pic"></div>
+                              <p>你好，<span><a class="top-enter" href="#">请登录</a></span></p>
+                         </div>
+                         
+                         <div class="details-bot clearfix">
+                            <span>
+                                   <a href="#">我的订单</a>
+                                   <a href="#">我的收藏</a>
+                            </span>
+                            
+                            <span>
+                                   <a href="#">我的信息</a>
+                                   <a href="#">会员专享</a>
+                            </span>
+
+                         </div>
+                       </div>
+                    
+                    </li>
+                    
+                     <li class="top-right-mobile">
+                          <div class="webname">
+                              <a href="#" class="text"><span class="mobile"></span>手机同程</a>
+                              <span class="icon"></span>
+                          </div>
+                          <div class="details">
+                             <p>扫码下载</p>
+                             <a href=""><img src="images/top_mobile_ewm.png"></a>
+                          </div>
+                     </li>
+                     
+                     <li class="top-right-weixin">
+                          <div class="webname">
+                              <a href="#" class="text"></span>微信</a>
+                              <span class="icon"></span>
+                          </div>
+                          <div class="details">
+                             
+                          </div>
+                     </li>
+                     
+                     <li class="top-right-phone">
+                          <div class="webname">
+                              <a href="#" class="text">电话</a>
+                              <span class="icon"></span>
+                          </div>
+                          <div class="details">
+                             <p>国内电话：4007-777-777</p>
+                             <p>海外电话：+86-512-8220-9000</p>
+                          </div>
+                     </li>
+                     
+                     <li class="top-right-client">
+                          <div class="webname">
+                              <a href="#" class="text">客户服务</a>
+                              <span class="icon"></span>
+                          </div>
+                          <div class="details">
+                            <ul>
+                               <li><a href="#">帮助中心</a></li>
+                               <li><a href="#">在线客服</a></li>
+                               <li><a href="#">人工申诉</a></li>
+                               <li><a href="#">旅游顾问</a></li>
+                            
+                            </ul>
+                             
+                          </div>
+                     </li>
+                     
+                     <li class="top-right-join">
+                          <div class="webname">
+                              <a href="#" class="text">合作中心</a>
+                              <span class="icon"></span>
+                          </div>
+                          <div class="details">
+                            <ul>
+                               <li><a href="#">联盟合作</a></li>
+                               <li><a href="#">商务合作</a></li>
+                               <li><a href="#">门票合作</a></li>
+                            </ul>
+                          </div>
+                     </li>
+                
+           
+           
+           </ul>
+        
+        </div>
+   
+   
+   
+   </div>
+</div>
+
+<!--搜索信息-->
+<div id="index-seek">
+    <div class="wrap">
+         <div class="enter">
+               <a href="#"><img src="images/0tF5Q9.gif"></a>
+               <div class="nowCity"> 
+                    <div class="text">
+                        北京
+                        <span></span>
+                    </div>
+                    
+                    <div class="cityList ">
+                        <div class="cityList-top">
+                             <ul>  
+                                <li class="hot-city">热门城市</li>
+                                <li>ABCD</li>
+                                <li>EFGH</li>
+                                <li>JKL</li>
+                                <li>MNPQR</li>
+                                <li>STW</li>
+                                <li>XYZ</li>
+                             </ul>                      
+                        </div>
+                        
+                        <div class="cityList-bottom">
+                        <ul class="clearfix">  
+                          <li>北京</li> <li>上海</li>  <li>深圳</li>
+                          <li>广州</li> <li>济南</li>  <li>苏州</li>
+                          <li>南京</li> <li>厦门</li>  <li>珠海</li>
+                          <li>大连</li> <li>石家庄</li> <li>郑州</li>
+                          <li>杭州</li> <li>宁波</li>  <li>无锡</li>
+                          <li>天津</li> <li>连云港</li> <li>西安</li>
+                          <li>成都</li> <li>武汉</li> 
+                          
+                        </ul>    
+                        </div>
+                    </div>
+             
+               </div>
+               <div class="search-box">
+                  <input type="text" name="search" placeholder="同城旅游节">
+                  <div class="state">
+                       <ul>
+                            <li>韩国</li>
+                            <li>泰国</li>
+                            <li>出境特卖</li>
+                       </ul>
+                  </div>
+                  <a class="btn">搜索</a>
+                </div>
+             
+                <a class="pic"><img src="images/20151211095842.gif"></a>
+                 
+         </div>
+    </div>
+</div>
+
+<!--水平导航-->
+<div id="index-navWrap">
+    <div class="wrap">
+       <ul class="nav">
+           <li>
+              <a class="index" href="#">首页</a>
+           </li>
+           
+           <li>
+              <a href="#">
+                出境游
+              <span></span>
+              </a>
+              <div class="details wrapWidth">
+                    <ul>
+                       <li><a href="#" class="index">出境首页</a></li>
+                       <li><a href="#">跟团游</a></li>
+                       <li><a href="#">自由行</a></li>
+                       <li>
+                            <a href="#">
+                              主题游
+                              <em>特色玩法</em>                       
+                            </a>
+                       </li>
+                       <li><a href="#">签证</a></li>
+                       <li><a href="#">海外玩乐</a></li>
+                       <li><a href="#">海外门票</a></li>
+                       <li><a href="#">出境特卖</a></li>
+                       <li><a href="#">出境定制</a></li>
+                       <li><a href="#" class="order">我的订单>></a></li>
+                    </ul>
+              </div>
+           
+           </li>
+           
+           <li>
+              <a href="#">
+                邮轮
+              <span></span>
+              </a>
+              <div class="details wrapWidth">
+                     <ul>
+                       <li><a href="#" class="index2">邮轮首页</a></li>
+                       <li><a href="#">远洋航线</a></li>
+                       <li><a href="#">国内航线</a></li>
+                       <li><a href="#">畅游南极</a></li>
+                       <li><a href="#">
+                              邮轮特卖
+                              <em>精选特惠</em>
+                           </a>
+                       </li>
+                       <li><a href="#">邮轮宝典</a></li> 
+                       <li><a href="#" class="order">我的订单>></a></li> 
+                    </ul>
+              </div>
+           </li>
+           
+           <li>
+              <a href="#">
+                国内游
+              <span></span>
+              </a>
+              <div class="details wrapWidth">
+                     <ul>
+                       <li><a href="#" class="index2">国内游首页</a></li>
+                       <li><a href="#">国内游特卖</a></li>
+                       <li><a href="#">包团定制</a></li>
+                       <li><a href="#">会玩中国极</a></li> 
+                       <li><a href="#" class="order">我的订单>></a></li> 
+                    </ul>
+              </div>
+           
+           </li>
+           
+            <li>
+              <a href="#">
+                周边游
+              <span></span>
+              </a>
+              <div class="details wrapWidth">
+                      <ul>
+                       <li><a href="#" class="index">酒店+景点</a></li>
+                       <li>
+                            <a href="#">
+                              周边跟团游
+                              <em>三月大促</em>
+                            </a>
+                       </li>
+                       <li><a href="#">周边特卖</a></li>
+                       <li><a href="#">周边亲子</a></li>
+                       <li><a href="#">客栈民宿</a></li>
+                       <li><a href="#"> 房车露营</a></li>
+                       <li><a href="#">当地玩乐</a></li>
+                       <li><a href="#">快乐大巴</a></li>
+                       <li><a href="#">包团定制</a></li>
+                       <li><a href="#" class="order">我的订单>></a></li>
+                    </ul>
+              </div>
+           </li>
+           
+            <li>
+              <a href="#">
+                景点
+              <span></span>
+              </a>
+              <div class="details wrapWidth">
+                   <ul>
+                       <li><a href="#" class="index"> 国内景点</a></li>
+                       <li><a href="#">海外门票</a></li>
+                       <li><a href="#">周边跟团游</a></li>
+                       <li><a href="#">当地玩乐</a></li>
+                       <li><a href="#">景点活动</a></li>
+                       <li><a href="#">包团定制</a></li>
+                       <li><a href="#" class="order">我的订单>></a></li>
+                    </ul>     
+              </div>
+           
+           </li>
+           
+            <li>
+              <a href="#">
+                酒店
+              <span></span>
+              </a>
+              <div class="details wrapWidth">
+                    <ul>                      
+                       <li><a href="#" class="index2"> 国内酒店</a></li>
+                       <li><a href="#">团购酒店</a></li>
+                       <li><a href="#">客栈民宿</a></li>
+                       <li><a href="#">酒店+景点</a></li>
+                       <li><a href="#">港澳台酒店</a></li>
+                       <li><a href="#">品牌汇</a></li>
+                       <li><a href="#" class="order">我的订单>></a></li>
+                    </ul>
+              </div>
+           
+           </li>
+           
+           
+            <li>
+              <a href="#">
+               机票
+              <span></span>
+              </a>
+              <div class="details wrapWidth">
+                      <ul>                      
+                           <li><a href="#" class="index3"> 国内机票</a></li>
+                           <li><a href="#">国际机票</a></li>
+                           <li><a href="#" class="order">我的订单>></a></li>
+                      </ul>
+              </div>
+           </li>
+           
+           
+            <li>
+              <a href="#">火车票</a>
+            </li>
+           
+           
+            <li>
+              <a href="#">汽车票</a>
+            </li>
+           
+           
+            <li>
+              <a href="#">
+                分期游
+                <em>全场免息</em>
+              </a>
+              
+            </li>
+           
+           <li>
+              <a href="#">
+                同程专线
+              <span></span>
+              </a>
+              <div class="details wrapWidth">
+                       <ul>                      
+                           <li><a href="#" class="index4"> 同程专线</a></li>
+                           <li><a href="#">定制旅游</a></li>
+                      </ul>
+              </div>
+           </li>
+           
+           <li>
+              <a href="#">签证</a>
+           </li>
+           
+           <li>
+              <a href="#">
+                金融
+              <span></span>
+              </a>
+              <div class="details wrapWidth">
+                    <ul>                      
+                       <li><a href="#" class="index4">程程白条</a></li>
+                       <li><a href="#">同同宝</a></li>
+                       <li>
+                            <a href="#">
+                              同程旅游卡
+                              <img src="images/new.gif">
+                            </a>
+                       </li>
+                      </ul>
+              </div>
+           
+           </li>
+           
+           <li>
+              <a href="#">
+                攻略
+              <span></span>
+              </a>
+              <div class="details wrapWidth">
+                    <ul>                      
+                       <li><a href="#" class="index5">攻略社区</a></li>
+                       <li><a href="#">国内目的地</a></li>
+                       <li><a href="#">境外目的地</a></li>
+                       <li><a href="#">游记</a></li>
+                       <li><a href="#">个人主页</a></li>
+                       <li><a href="#" class="order">写游记>></a></li>
+                    </ul>
+              </div>
+           
+           </li>
+       </ul>
+    </div>
+</div>
+
+<!--幻灯片-->
+<div id="index-slideWrap">
+  <div class="wrap">
+  	<ul class="slide">
+        <li>
+            <a href="#"><img src="images/img1.jpg" /></a>
+        </li>
+        <li>
+            <a href="#"><img src="images/img2.jpg" /></a>
+        </li>
+        <li>
+            <a href="#"><img src="images/img3.jpg" /></a>
+        </li>
+        <li>
+            <a href="#"><img src="images/img4.jpg" /></a>
+        </li>
+        <li>
+            <a href="#"><img src="images/img5.jpg" /></a>
+        </li>
+    </ul>
+    
+   
+    
+  
+  </div>
+</div>
+
+<!--左边导航-->
+<div id="index-leftNav" class="wrap">
+   <ul class="nav">
+            <li class="li1 current" >
+                <div class="text">
+                    <span></span>
+                    出境游
+                </div>
+                <div class="details">
+                     <div class="top">
+                           <ul class="clearfix">  
+                           		<li><a href="#">跟团游</a></li>
+                                <li><a href="#">自由行</a></li> 
+                                <li><a href="#">签证</a></li>
+                                <li><a href="#">海外玩乐</a></li>  
+                            
+                           </ul>
+                     </div>
+                     
+                     <div class="middle clearfix">
+                     		<form>
+                                <label>出发地</label> <input type="text" value="北京"> <br>
+                                <label>目的地</label> <input type="text" value="韩国">
+                            </form>
+                            <span>搜索</span>
+                     </div>
+                     
+                     <div class="bottom clearfix">
+                         <a href="#">错峰游世界</a>
+                         <a href="#">泰国泼水节</a>
+                         <a href="#">台湾初体验</a>
+                         <a href="#">日韩花季</a>
+                         <a href="#">欧澳新出游</a>
+                         <a href="#">海岛狂欢趴</a>
+                         <ul>
+                            <li>
+                               <a href="#">
+                                 <img src="images/QdiXMG_430x270_00.jpg">
+                                 <span>济州岛</span>
+                               </a>
+                               
+                            </li>
+                            <li>
+                               <a href="#">
+                                   <img src="images/aumtsd_430x270_00.jpg">
+                                   <span>曼谷</span>
+                               </a>
+                               
+                            </li>
+                            <li>
+                               <a href="#">
+                                   <img src="images/vvbLF7_430x270_00.jpg">
+                                   <span>新马泰</span>
+                               </a>
+                               
+                            </li>
+                            <li>
+                               <a href="#">
+                                   <img src="images/KEd0ei_430x270_00.jpg">
+                                   <span>日本</span>
+                               </a>
+                               
+                            </li>
+                        
+                         </ul>
+                   </div>
+
+                </div>
+            </li>
+            
+            <li class="li2">
+               <div class="text">
+                    <span></span>
+                    国内游
+                </div>
+                <div class="details">
+                     <div class="top"></div>
+                     
+                     <div class="middle clearfix">
+                     		<form>
+                                <label>出发地</label> <input type="text" value="北京"> <br>
+                                <label>目的地</label> <input type="text" value="请输入目的地、主题或关键词">
+                            </form>
+                            <span>搜索</span>
+                     </div>
+                     
+                     <div class="bottom clearfix">
+                         <a href="#">海南</a>
+                         <a href="#">云南</a>
+                         <a href="#">华北</a>
+                         <a href="#">四川</a>
+                         <a href="#">广西</a>
+                         <a href="#">福建</a>
+                         <a href="#">湖南</a>
+                         <a href="#">西藏</a>
+                         <a href="#">陕西</a>
+                         <a href="#">湖北</a>
+                         <ul>
+                            <li>
+                               <a href="#">
+                                 <img src="images/ubGiiN.jpg">
+                                 <span>玩转中国</span>
+                               </a>
+                               
+                            </li>
+                            <li>
+                               <a href="#">
+                                   <img src="images/dBjpM8.jpg">
+                                   <span>国内特卖</span>
+                               </a>
+                               
+                            </li>
+                            <li>
+                               <a href="#">
+                                   <img src="images/nWlIIV.jpg">
+                                   <span>赏花踏青</span>
+                               </a>
+                               
+                            </li>
+
+                         </ul>
+                     </div>
+                </div>
+                    </li>
+            
+            <li class="li3">
+               <div class="text">
+                    <span></span>
+                    周边游
+                </div>
+                <div class="details">
+                      <div class="top">
+                           <ul class="clearfix">  
+                           		<li><a href="#">酒店+景点</a></li>
+                                <li><a href="#">周边跟团游</a></li> 
+                                <li><a href="#">景点</a></li>
+                                <li><a href="#">当地玩乐</a></li>  
+                            
+                           </ul>
+                     </div>
+                     
+                     <div class="middle clearfix">
+                     		<form>
+                                <input type="text"> <br>
+                                
+                            </form>
+                            <span>搜索</span>
+                     </div>
+                     
+                     <div class="bottom clearfix">
+                       
+                          <p>热搜关键词：</p>
+                             <a href="#">西塘古镇</a>
+                             <a href="#">杭州千岛湖森林</a>
+                             <a href="#">杭州宋城烂苹果</a>
+                             <a href="#">安吉凯蒂猫家园</a>
+                             <a href="#">特卖促销</a>
+                             <a href="#">10元度周末</a>
+                             <a href="#">周边跟团</a>
+                             <a href="#">周边大促</a>
+                             <div style="clear:both"></div>
+                           <p>热搜城市：</p>
+                              <a href="#">苏州</a>
+                              <a href="#">常州</a>
+                              <a href="#">无锡</a>
+                              <a href="#">南京</a>
+                              <a href="#">扬州</a>
+                             
+                     </div>
+                </div>
+            </li>
+         
+         
+         <li class="li4">
+               <div class="text">
+                    <span></span>
+                    景点门票
+                </div>
+                <div class="details">
+                       <div class="top">
+                           <ul class="clearfix">  
+                           		<li><a href="#">景点</a></li>
+                                <li><a href="#">酒店+景点</a></li> 
+                                <li><a href="#">周边跟团游</a></li>
+                                <li><a href="#">当地玩乐</a></li>  
+                            
+                           </ul>
+                     </div>
+                     
+                     <div class="middle clearfix">
+                     		<form>
+                                <input type="text"> <br>
+                                
+                            </form>
+                            <span>搜索</span>
+                     </div>
+                     
+                     <div class="bottom clearfix">
+                       
+                          <p>精选主题：</p>
+                             <a href="#">主题乐园</a>
+                             <a href="#">赏花</a>
+                             <a href="#">温泉</a>
+                             <a href="#">名胜古迹</a>
+                             <div style="clear:both"></div>
+                          <p>热搜城市：</p>
+                                 <a href="#">苏州</a>
+                                 <a href="#">常州</a>
+                                 <a href="#">无锡</a>
+                                 <a href="#">南京</a>
+                                 <a href="#">扬州</a>
+                                 <div style="clear:both"></div>
+                           <p>热搜关键词：</p>
+                                 <a href="#">321大促</a>
+                                 <a href="#">三国城、水浒城舞狮争霸赛</a>
+                           
+                           
+                     </div>
+                </div>
+         </li>
+         
+         
+         <li class="li5">
+               <div class="text">
+                    <span></span>
+                    酒店
+               </div>
+               <div class="details">
+                       <div class="top">
+                           <ul class="clearfix">  
+                           		<li><a href="#">国内酒店</a></li>
+                                <li><a href="#">团购特惠</a></li> 
+                                <li><a href="#">酒店+景点</a></li>
+                                <li><a href="#">当地玩乐</a></li>  
+                            
+                           </ul>
+                     </div>
+                     
+                     <div class="middle clearfix">
+                     		<form>
+                                <label>目的地</label> <input type="text" value="北京"> </br>
+                                <label>入住日期</label> <input type="text" value="2016-03-15"></br>
+                                <label>离开日期</label> <input type="text" value="2016-03-16"></br>
+                                <label>关键词</label> <input type="text" value="输入 位置 酒店名 或品牌">
+                            </form>
+                            <span>搜索</span>
+                     </div>
+                </div> 
+          </li>
+         
+         
+         <li class="li6">
+               <div class="text">
+                    <span></span>
+                    机票
+                </div>
+                <div class="details">
+                    <div class="top">
+                           <ul class="clearfix">  
+                           		<li><a href="#">国内机票</a></li>
+                                <li><a href="#">国际机票</a></li> 
+                                  
+                            
+                           </ul>
+                     </div>
+                     
+                     <div class="middle clearfix">
+                     		<form>
+                               形成类型:
+                                <input type="radio">单程
+                                <input type="radio"> 往返
+                                <input type="radio" > 联程</br>
+                                 <label>出发城市</label> <input class="text" type="text" value="北京"> 
+                                 <label>出发日期</label> <input class="text" type="text" value="2016-03-15"></br>
+                                 <label>到达城市</label> <input class="text" type="text" value="上海"> </br>
+                               
+                            </form>
+                            
+                            <span>搜索</span>
+                           
+                     </div>
+                </div> 
+         </li>
+          
+         <li class="li7">
+               <div class="text">
+                    <span></span>
+                    火车票
+                </div>
+                <div class="details">
+                     <div class="top"></div>
+                     
+                     <div class="middle clearfix">
+                     		<form>
+                               形成类型:
+                                <input type="radio">单程
+                                <input type="radio"> 往返
+                                <input type="radio" > 联程</br>
+                                 <label>出发城市</label> <input class="text" type="text" value="北京"> 
+                                 <label>出发日期</label> <input class="text" type="text" value="2016-03-15"> </br>
+                                 <label>到达城市</label> <input class="text" type="text" value="天津"> </br>
+                            </form>
+                            
+                            <span>搜索</span>
+                           
+                     </div>
+                </div>
+            
+         </li>
+          
+          <li class="li8">
+               <div class="text">
+                    <span></span>
+                    邮轮
+                </div>
+                <div class="details">
+                        <div class="top"></div>
+                     
+                     <div class="middle clearfix">
+                     		<form>
+                                <label>邮轮航线</label> <input type="text" value="不限"> </br>
+                                <label>出发城市</label> <input type="text" value="不限"></br>
+                                <label>邮轮公司</label> <input type="text" value="不限"></br>
+                               
+                            </form>
+                            <span>搜索</span>
+                     </div>
+                     <div class="bottom clearfix">
+                         <a href="#">邮轮特卖</a>
+                         <a href="#">南极</a>
+                         <a href="#">春邮赏樱</a>
+                         <div style="clear:both"></div>
+                        
+                         <ul>
+                            <li>
+                               <a href="#">
+                                 <img src="images/iBoB1b_224x146_00.jpg">
+                                 <span>日韩</span>
+                               </a>
+                               
+                            </li>
+                            <li>
+                               <a href="#">
+                                   <img src="images/N8SOYC.jpg">
+                                   <span>国内</span>
+                               </a>
+                               
+                            </li>
+                            <li>
+                               <a href="#">
+                                   <img src="images/yyEx5V.jpg">
+                                   <span>南极</span>
+                               </a>
+                               
+                            </li>
+                            <li>
+                               <a href="#">
+                                   <img src="images/V4o7gh.jpg">
+                                   <span>地中海</span>
+                               </a>
+                               
+                            </li>
+                         </ul>
+                     </div>
+               </div>
+          </li>
+   </ul> 
+</div>
+
+<!--同城旅游节-->
+<div id="index-Project">
+  <div class="wrap clearfix">
+     <h3></h3>
+     <ul class="hottab clearfix" >
+            <li class="click">旅游节特惠</li>
+            <li>出境游</li>
+            <li>国内游</li>
+            <li>邮轮</li>
+            <li>周边游</li>
+            <a href="#">分期游</a>
+     </ul>
+     
+     <div class="infocon clearfix">
+         <div class="info-left">
+              <div class="btndiv">
+                 <ul> 
+                    <li><a href="#"><img src="images/hc1.jpg"></a></li>
+                    <li><a href="#"><img src="images/hc2.jpg"></a></li>
+                    <li><a href="#"><img src="images/hc3.jpg"></a></li>
+                    <li><a href="#"><img src="images/hc4.jpg"></a></li>
+                    <li><a href="#"><img src="images/hc5.jpg"></a></li>
+                    <li><a href="#"><img src="images/hc6.jpg"></a></li>      
+                 </ul>
+              
+              
+              </div>
+         </div>
+         <div class="info-right">
+            <div class="imgBlock show">  
+                 <ul>
+                    <li>
+                       <div class="imgWrap">
+                          <img src="images/lyjth1.webp.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[上海出港]大西洋号4月17上海-济州-福冈-上海4晚5日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">1799</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                    <img src="images/7agzUB.png">
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/lyjth2.webp.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[上海出港]新世纪号5月17上海-济州-釜山-长崎-上海5晚6日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">1999</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                    <img src="images/7agzUB.png">
+                               </div>
+                         </div>
+                       </div>
+                     </li>
+                     
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/lyjth3.webp.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[南京出发]桂林+兴坪+漓江+阳朔双卧6日跟团游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">1688</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                    <img src="images/7agzUB.png">
+                               </div>
+                         </div>
+                       </div>
+                     </li>
+                     
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/lyjth4.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[上海出港]海洋水手号6月24上海-济州-福釜山-长崎-上海4晚5日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">2300</span>起
+
+                              </div>
+                          
+                              <div class="rightInfo">
+                                    <img src="images/7agzUB.png">
+                               </div>
+                         </div>
+                       </div>
+                     </li>
+                     
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/lyjth5.webp.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[南京出发]桂林+兴坪+漓江+阳朔双卧6日跟团游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">1679</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                    <img src="images/7agzUB.png">
+                               </div>
+                         </div>
+                       </div>
+                     </li>
+                     
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/lyjth6.webp.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[南京出发]北京双高5日跟团游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">1688</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                    <img src="images/7agzUB.png">
+                               </div>
+                         </div>
+                       </div>
+                     </li>
+                     
+                     
+                 </ul>
+            </div>
+            
+            <div  class="imgBlock">  
+                <ul>
+                    <li>
+                       <div class="imgWrap">
+                          <img src="images/cjy1.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>香港4晚5日自由行</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">2799</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                    北京
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/cjy2.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>【台湾经典】无锡台北往返7晚8日游 </h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">2999</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京
+                               </div>
+                         </div>
+                       </div>
+                     </li>
+                     
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/cjy3.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>香港4晚5日自助游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">2688</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京
+                               </div>
+                         </div>
+                       </div>
+                     </li>
+                     
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/cjy4.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>本州+双古都5晚6日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">2500</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京
+                               </div>
+                         </div>
+                       </div>
+                     </li>
+                     
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/cjy5.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>台湾尊爵环岛7晚8日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">1879</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                    北京
+                               </div>
+                         </div>
+                       </div>
+                     </li>
+                     
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/cjy6.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[舒心•无忧之旅]曼谷+芭堤雅5晚6日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">1988</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                    北京
+                               </div>
+                         </div>
+                       </div>
+                     </li>
+                     
+                     
+                 </ul>
+            
+            </div>
+            
+            <div  class="imgBlock">  
+               <ul>
+                    <li>
+                       <div class="imgWrap">
+                          <img src="images/gny1.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>厦门鼓浪屿双飞4日自由行</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">2099</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                    北京
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/gny2.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>北京双飞5日跟团游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">2799</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                    北京
+                               </div>
+                         </div>
+                       </div>
+                     </li>
+                     
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/gny3.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>厦门双飞4日自由行</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">2668</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                    北京
+                               </div>
+                         </div>
+                       </div>
+                     </li>
+                     
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/gny4.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>北京双飞5日跟团游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">1600</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                    北京
+                               </div>
+                         </div>
+                       </div>
+                     </li>
+                     
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/gny5.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>成都+九寨沟+牟尼沟双飞5日跟团游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">1829</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                    北京
+                               </div>
+                         </div>
+                       </div>
+                     </li>
+                     
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/gny6.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>昆明+大理+丽江3飞6日跟团游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">1998</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                    北京
+                               </div>
+                         </div>
+                       </div>
+                     </li>
+                     
+                     
+                 </ul>
+            
+            </div>
+            <div  class="imgBlock">  
+                 <ul>
+                    <li>
+                       <div class="imgWrap">
+                          <img src="images/yl1.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>【歌诗达邮轮-赛琳娜号】2016年05月13日 上海-济州-鹿儿岛-上海 4晚5日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">3799</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                    北京
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/yl2.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>【歌诗达邮轮-赛琳娜号】2016年04月06日 上海-济州-长崎-上海 4晚5日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">1799</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                    北京
+                               </div>
+                         </div>
+                       </div>
+                     </li>
+                     
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/yl3.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>【歌诗达邮轮-赛琳娜号】2016年04月02日上海-济州-福冈-上海 4晚5日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">2688</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京
+                               </div>
+                         </div>
+                       </div>
+                     </li>
+                     
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/yl4.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>【预售特惠】【歌诗达邮轮-赛琳娜号】4月30日 上海-济州-釜山-福冈-上海  5晚6日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">2900</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                    北京
+                               </div>
+                         </div>
+                       </div>
+                     </li>
+                     
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/yl5.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>2016年4月20日【皇家加勒比-海洋水手号】上海-济州-釜山-长崎-上海 5晚6日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">1979</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                    北京
+                               </div>
+                         </div>
+                       </div>
+                     </li>
+                     
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/yl6.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>【皇家加勒比邮轮-海洋量子号】2016年3月29日  上海-釜山-长崎-上海 5晚6日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">2688</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                    北京
+                               </div>
+                         </div>
+                       </div>
+                     </li>
+                     
+                     
+                 </ul>
+            
+            </div>
+            <div  class="imgBlock">  
+                 <ul>
+                    <li>
+                       <div class="imgWrap">
+                          <img src="images/zby1.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>维洛纳情侣主题酒店1晚+北京欢乐谷门票2张，多套餐自选</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">799</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/zby2.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>张裕爱斐堡酒庄住宿（双早）+张裕爱斐堡国际酒庄参观！</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">999</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                    北京
+                               </div>
+                         </div>
+                       </div>
+                     </li>
+                     
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/zby3.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>入住古北水镇大酒店，可享景区门票优惠价80元/张，还赠送温泉代金券100元（截止2016.3.31）</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">688</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                    北京
+                               </div>
+                         </div>
+                       </div>
+                     </li>
+                     
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/zby4.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>【活动优选】【程意温泉】北京蟹岛度假村1晚，自选蟹岛套票6选3套餐，单房/套餐自选</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">1300</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京
+                               </div>
+                         </div>
+                       </div>
+                     </li>
+                     
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/zby5.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>稻香湖景酒店1晚+双人温泉+双早+多景点抵用券</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">979</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                    北京
+                               </div>
+                         </div>
+                       </div>
+                     </li>
+                     
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/zby6.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>稻香湖景酒店1晚+双人温泉+双早+多景点抵用券</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">688</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                    北京
+                               </div>
+                         </div>
+                       </div>
+                     </li>
+                     
+                     
+                 </ul>
+            
+            </div>
+         
+         
+         </div>
+
+     </div>
+  
+  
+  
+  
+  </div>
+</div>
+
+<!--每日特惠-->
+<div id="index-favorable">
+   <div class="wrap clearfix">
+      <h3>每日特惠</h3>
+      <div class="line"></div>
+      <div class="favorable-left">
+         <ul class="clearfix"> 
+            <li>
+                <div class="imgWrap">
+                  <img src="images/mrth1.jpg">
+                </div>
+                <div class="text">
+                   <h4>天目湖君悦假日酒店1晚（含双早#80元鱼头抵用券）</h4>
+                   <div class="info">
+                          <div class="leftInfo">
+                                <span class="unit">¥</span><span class="price">119</span>起
+                          </div>
+                          
+                          <div class="rightInfo">
+                                周边游
+                           </div>
+                   </div>
+                </div>
+            </li>
+            
+            <li>
+                <div class="imgWrap">
+                  <img src="images/mrth2.jpg">
+                </div>
+                <div class="text">
+                   <h4>天目湖君悦假日酒店1晚（含双早#80元鱼头抵用券）</h4>
+                   <div class="info">
+                          <div class="leftInfo">
+                                <span class="unit">¥</span><span class="price">159</span>起
+                          </div>
+                          
+                          <div class="rightInfo">
+                                周边游
+                           </div>
+                   </div>
+                </div>
+            </li>
+            
+            <li>
+                <div class="imgWrap">
+                  <img src="images/mrth3.jpg">
+                </div>
+                <div class="text">
+                   <h4>天目湖君悦假日酒店1晚（含双早#80元鱼头抵用券）</h4>
+                   <div class="info">
+                          <div class="leftInfo">
+                                <span class="unit">¥</span><span class="price">299</span>起
+                          </div>
+                          
+                          <div class="rightInfo">
+                                周边游
+                           </div>
+                   </div>
+                </div>
+            </li>
+            
+            <li>
+                <div class="imgWrap">
+                  <img src="images/mrth4.jpg">
+                </div>
+                <div class="text">
+                   <h4>天目湖君悦假日酒店1晚（含双早#80元鱼头抵用券）</h4>
+                   <div class="info">
+                          <div class="leftInfo">
+                                <span class="unit">¥</span><span class="price">166</span>起
+                          </div>
+                          
+                          <div class="rightInfo">
+                                周边游
+                           </div>
+                   </div>
+                </div>
+            </li>
+            
+            <li>
+                <div class="imgWrap">
+                  <img src="images/mrth5.jpg">
+                </div>
+                <div class="text">
+                   <h4>天目湖君悦假日酒店1晚（含双早#80元鱼头抵用券）</h4>
+                   <div class="info">
+                          <div class="leftInfo">
+                                <span class="unit">¥</span><span class="price">199</span>起
+                          </div>
+                          
+                          <div class="rightInfo">
+                                周边游
+                           </div>
+                   </div>
+                </div>
+            </li>
+            
+            <li>
+                <div class="imgWrap">
+                  <img src="images/mrth6.jpg">
+                </div>
+                <div class="text">
+                   <h4>天目湖君悦假日酒店1晚（含双早#80元鱼头抵用券）</h4>
+                   <div class="info">
+                          <div class="leftInfo">
+                                <span class="unit">¥</span><span class="price">210</span>起
+                          </div>
+                          
+                          <div class="rightInfo">
+                                周边游
+                           </div>
+                   </div>
+                </div>
+            </li>
+            
+            <li>
+                <div class="imgWrap">
+                  <img src="images/mrth7.jpg">
+                </div>
+                <div class="text">
+                   <h4>天目湖君悦假日酒店1晚（含双早#80元鱼头抵用券）</h4>
+                   <div class="info">
+                          <div class="leftInfo">
+                                <span class="unit">¥</span><span class="price">120</span>起
+                          </div>
+                          
+                          <div class="rightInfo">
+                                周边游
+                           </div>
+                   </div>
+                </div>
+            </li>
+            
+            <li>
+                <div class="imgWrap">
+                  <img src="images/mrth8.jpg">
+                </div>
+                <div class="text">
+                   <h4>天目湖君悦假日酒店1晚（含双早#80元鱼头抵用券）</h4>
+                   <div class="info">
+                          <div class="leftInfo">
+                                <span class="unit">¥</span><span class="price">169</span>起
+                          </div>
+                          
+                          <div class="rightInfo">
+                                周边游
+                           </div>
+                   </div>
+                </div>
+            </li>
+         </ul>
+      </div>
+      <div class="favorable-right">
+            <div class="imgDescribe">
+                <img src="images/right1.jpg" />
+                <img class="towCode" src="images/towCode.png"/>
+            </div>
+            
+            <div class="imgDescribe">
+                <img src="images/right2.jpg" />
+                <img class="towCode" src="images/towCode.png"/>
+            </div>
+      
+      </div>
+   
+   
+   
+   
+   
+   </div>
+</div>
+
+<!--出境游-->
+<div id="index-outboundTravel">
+  <div class="wrap clearfix">
+     <h3 class="abroad">出境游</h3>
+     <div class="line"></div>
+     <div class="infocon clearfix">
+         <div class="info-left">
+                <h4>热门目的地</h4>
+                <ul class="clearfix"> 
+                   <li><a href="#">海岛</a></li>
+                   <li><a href="#">东南亚</a></li>
+                   <li><a href="#">韩国</a></li>
+                   <li><a href="#">日本</a></li>
+                   <li><a href="#">澳新</a></li>
+                   <li><a href="#">港澳</a></li>
+                   <li><a href="#">泰国</a></li>
+                   <li><a href="#">美国</a></li>
+                   <li><a href="#">法国</a></li>
+                   <li><a href="#">柬埔寨</a></li>
+                   <li><a href="#">埃及</a></li>
+                   <li><a href="#">首尔</a></li>
+                   <li><a href="#">俄罗斯</a></li>
+                   <li><a href="#">朝鲜</a></li>
+                   <li><a href="#">土耳其</a></li>
+                   <li><a href="#">台湾</a></li>
+                   <li><a href="#">普吉岛</a></li>
+                   <li><a href="#">巴厘岛</a></li>
+                   <li><a href="#">马尔代夫</a></li>
+                   <li><a href="#">迪拜</a></li>            
+                </ul>
+                <h4>精选活动</h4>
+                <ul class="clearfix"> 
+                   <li><a href="#">出境特卖</a></li>
+                   <li><a href="#">出境定制</a></li>
+                   <li><a href="#">全球签证</a></li>
+                   <li><a href="#">海外玩乐</a></li>
+                   <li><a href="#">海外门票</a></li>         
+                </ul>
+         </div>
+         <div class="info-right clearfix">
+              <ul class="hottab clearfix" >
+                <li class="click">日本</li>
+                <li>韩国</li>
+                <li>泰国</li>
+                <li>港澳台</li>
+                <li>澳新</li>
+                <li>中东非洲</li>
+                <li>欧洲</li>
+                <li>东南亚</li>
+                <li>美洲</li>
+                <li>海岛</li> 
+              </ul>
+              <div  class="imgBlock clearfix show"> <!--日本-->
+                 <div class="box">
+                    <img src="images/z8P4Sp.jpg">
+                    <a class="more" href="#">更多日本线路</a>
+                 <ul>
+                    <li>
+                       <div class="imgWrap">
+                          <img src="images/rbfj1.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]日本大阪+奈良+京都+箱根+东京6晚7日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">2799</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     
+                      <li>
+                       <div class="imgWrap">
+                          <img src="images/rbfj2.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]日本大阪+箱根+镰仓+东京5晚6日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">4699</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     <li class="mr0">
+                       <div class="imgWrap">
+                          <img src="images/rbfj3.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]日本九州4晚5日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">3099</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/rbfj4.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>日本北海道6日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">1999</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/rbfj5.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>日本大阪+京都+奈良4晚5日半自助游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">2989</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/rbfj6.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]日本赏樱东京+大阪+箱根+名古屋5晚6日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">2099</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                  北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/rbfj7.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]日本东京+箱根+京都+大阪6晚7日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">3599</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     
+                     <li class="mr0">
+                       <div class="imgWrap">
+                          <img src="images/rbfj8.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]日本九州3晚4日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">2999</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                    北京出发
+                               </div>
+                         </div>
+                       </div>
+                     </li>
+                     
+                 </ul>
+                 </div>
+            </div>
+            
+              <div  class="imgBlock clearfix ">  <!--韩国-->
+                <div class="box">
+                 <img src="images/z8P4Sp.jpg">
+                 <a class="more" href="#">更多韩国线路</a>
+                 <ul>
+                    <li>
+                       <div class="imgWrap">
+                          <img src="images/hglv1.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]韩国济州岛5日半自助游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">1799</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     
+                      <li>
+                       <div class="imgWrap">
+                          <img src="images/hglv2.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]韩国济州岛4日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">1599</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     <li class="mr0">
+                       <div class="imgWrap">
+                          <img src="images/hglv3.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[自由行]魅力首尔3晚4日自由行</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">2899</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/hglv4.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]首尔5日尊享半自由行 </h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">3599</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/hglv5.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[自由行]魅力首尔4晚5日自由行</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">3099</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/hglv6.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[自由行]魅力首尔4晚5日自由行</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">3399</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                  北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/hglv7.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[自由行]魅力首尔4晚5日自由行</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">2899</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     
+                     <li class="mr0">
+                       <div class="imgWrap">
+                          <img src="images/hglv8.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]首尔济州五日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">2599</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                    北京出发
+                               </div>
+                         </div>
+                       </div>
+                     </li>
+                     
+                   </ul>
+                 </div>
+            </div>
+            
+            <div  class="imgBlock clearfix">  <!--泰国-->
+              <div class="box">
+                 <img src="images/z8P4Sp.jpg">
+                 <a class="more" href="#">更多泰国线路</a>
+                 <ul>
+                    <li>
+                       <div class="imgWrap">
+                          <img src="images/tglv1.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]（踏浪•寻觅之旅）曼谷+芭堤雅4晚5日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">2580</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     
+                      <li>
+                       <div class="imgWrap">
+                          <img src="images/tglv2.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]<轻奢•美食之旅>曼谷+芭堤雅5晚6天游（含沙美岛）</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">3380</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     <li class="mr0">
+                       <div class="imgWrap">
+                          <img src="images/tglv3.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]<舒心•无忧之旅>曼谷+芭堤雅5晚6日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">2980</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/tglv4.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]普吉岛+斯米兰四晚六日挚爱之旅</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">3980</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/tglv5.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]曼谷+芭提雅5晚6日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">3680</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/tglv6.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]曼谷+芭提雅5晚6日美食游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">4580</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                  北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/tglv7.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]普吉岛4晚6日半自助游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">3299</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     
+                     <li class="mr0">
+                       <div class="imgWrap">
+                          <img src="images/tglv8.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]曼谷+芭提雅6日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">3880</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                    北京出发
+                               </div>
+                         </div>
+                       </div>
+                     </li>
+                 </ul>
+              </div>
+            </div>
+            
+            <div  class="imgBlock clearfix">  <!--港澳台-->
+              <div class="box">
+                 <img src="images/z8P4Sp.jpg">
+                 <a class="more" href="#">更多港澳台线路</a>
+                 <ul>
+                    <li>
+                       <div class="imgWrap">
+                          <img src="images/gatlv1.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]台湾尊爵环岛7晚8日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">3199</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     
+                      <li>
+                       <div class="imgWrap">
+                          <img src="images/gatlv2.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]台湾环岛7晚8日之旅</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">2699</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     <li class="mr0">
+                       <div class="imgWrap">
+                          <img src="images/gatlv3.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]【遇见台湾】环岛7晚8日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">2750</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/gatlv4.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]【生态宝岛】台湾7晚8日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">2750</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/gatlv5.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]台湾尊爵环岛7晚8日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">4099</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/gatlv6.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[自由行]香港4晚5日自由行</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">1875</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                  北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/gatlv7.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]香港+澳门4晚5日美食游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">2420</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     
+                     <li class="mr0">
+                       <div class="imgWrap">
+                          <img src="images/gatlv8.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]香港+澳门高品4晚5日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">1650</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                    北京出发
+                               </div>
+                         </div>
+                       </div>
+                     </li>
+                 </ul>
+               </div>
+            </div>
+            
+            <div  class="imgBlock clearfix">  <!--澳新-->
+               <div class="box">
+                 <img src="images/z8P4Sp.jpg">
+                 <a class="more" href="#">更多澳新线路</a>
+                 <ul>
+                    <li>
+                       <div class="imgWrap">
+                          <img src="images/axlv1.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]【非凡澳洲】澳大利亚+凯恩斯+墨尔本8晚10日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">12799</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     
+                      <li>
+                       <div class="imgWrap">
+                          <img src="images/axlv2.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]澳新凯墨南北岛14晚17/18日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">14699</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     <li class="mr0">
+                       <div class="imgWrap">
+                          <img src="images/axlv3.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[自由行]墨尔本+凯恩斯7晚9日半自助游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">13099</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/axlv4.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]澳大利亚+新西兰南北岛+凯恩斯+墨尔本12晚14日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">21999</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/axlv5.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]澳新凯墨南北岛冰川升级17日</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">22989</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/axlv6.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]澳大利亚+凯恩斯+新西兰南北岛冰川15晚17天游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">22099</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                  北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/axlv7.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[自由行]悉尼+黄金海岸8晚10日半自助游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">33599</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     
+                     <li class="mr0">
+                       <div class="imgWrap">
+                          <img src="images/axlv8.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]日本九州3晚4日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">22999</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                    北京出发
+                               </div>
+                         </div>
+                       </div>
+                     </li>
+                 </ul>
+               </div>
+                
+            </div>
+            
+            <div  class="imgBlock clearfix">  <!--中东非洲-->
+              <div class="box">
+                 <img src="images/z8P4Sp.jpg">
+                 <a class="more" href="#">更多中东非洲线路</a>
+                 <ul>
+                    <li>
+                       <div class="imgWrap">
+                          <img src="images/zdfzlv1.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]南非5晚8日经典游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">12799</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     
+                      <li>
+                       <div class="imgWrap">
+                          <img src="images/zdfzlv2.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]埃及6晚9游轮之旅</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">8699</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     <li class="mr0">
+                       <div class="imgWrap">
+                          <img src="images/zdfzlv3.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]埃及游轮7晚10日深度游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">7099</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/zdfzlv4.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]【尊享】土耳其9晚12日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">6999</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/zdfzlv5.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]土耳其品质之旅7晚10日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">8989</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/zdfzlv6.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[自由行]【疯狂极限】迪拜4晚5日自助游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">7099</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                  北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/zdfzlv7.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]迪拜+沙迦+阿布扎比3晚6日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">13599</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     
+                     <li class="mr0">
+                       <div class="imgWrap">
+                          <img src="images/zdfzlv8.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]南非9~10天游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">22999</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                    北京出发
+                               </div>
+                         </div>
+                       </div>
+                     </li>
+                 </ul>
+                </div>
+            </div>
+            
+            <div  class="imgBlock clearfix">  <!--欧洲-->
+              <div class="box">
+                 <img src="images/z8P4Sp.jpg">
+                 <a class="more" href="#">更多欧洲线路</a>
+                 <ul>
+                    <li>
+                       <div class="imgWrap">
+                          <img src="images/axlv1.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]希腊深度6晚9日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">12799</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     
+                      <li>
+                       <div class="imgWrap">
+                          <img src="images/axlv2.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]法国+瑞士+意大利+德国9晚11日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">14699</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     <li class="mr0">
+                       <div class="imgWrap">
+                          <img src="images/axlv3.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]西班牙+葡萄牙9晚11日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">8099</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/axlv4.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]法国+瑞士+意大利+德国9晚11日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">5999</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/axlv5.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[自由行]德国+捷克10晚12天自由行</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">9989</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/axlv6.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]【非凡法瑞意】11晚13日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">7099</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                  北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/axlv7.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]【319会销预热】法国+瑞士+意大利+德国9晚12日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">13599</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     
+                     <li class="mr0">
+                       <div class="imgWrap">
+                          <img src="images/axlv8.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]俄罗斯红色经典5晚7天</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">9999</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                    北京出发
+                               </div>
+                         </div>
+                       </div>
+                     </li>
+                 </ul>
+                </div>
+            </div>
+            
+            <div  class="imgBlock clearfix">  <!--东南亚-->
+              <div class="box">
+                 <img src="images/z8P4Sp.jpg">
+                 <a class="more" href="#">更多东南亚线路</a>
+                 <ul>
+                    <li>
+                       <div class="imgWrap">
+                          <img src="images/rbfj1.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]曼谷+芭提雅5晚6日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">4799</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     
+                      <li>
+                       <div class="imgWrap">
+                          <img src="images/rbfj2.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]曼谷+芭提雅5晚6日美食游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">5699</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     <li class="mr0">
+                       <div class="imgWrap">
+                          <img src="images/rbfj3.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]普吉岛4晚6日半自助游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">6099</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/rbfj4.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]普吉岛4晚6日半自助游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">4999</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/rbfj5.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]普吉+甲米缤纷双岛5晚6日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">2989</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/rbfj6.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]曼谷+苏梅纯玩5晚6日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">5099</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                  北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/rbfj7.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]曼谷+清迈5晚6日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">5599</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     
+                     <li class="mr0">
+                       <div class="imgWrap">
+                          <img src="images/rbfj8.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]普吉+甲米4晚5日/5晚6日泰寻之旅</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">7999</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                    北京出发
+                               </div>
+                         </div>
+                       </div>
+                     </li>
+                 </ul>
+                </div>
+            </div>
+            
+              <div  class="imgBlock clearfix ">  <!--美洲-->
+                <div class="box">
+                 <img src="images/z8P4Sp.jpg">
+                 <a class="more" href="#">更多美洲线路</a>
+                 <ul>
+                    <li>
+                       <div class="imgWrap">
+                          <img src="images/hglv1.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[自由行]美国3-30日超级自由行</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">12799</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     
+                      <li>
+                       <div class="imgWrap">
+                          <img src="images/hglv2.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[自由行]美国西海岸6晚8日自助游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">14699</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     <li class="mr0">
+                       <div class="imgWrap">
+                          <img src="images/hglv3.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]美国东西海岸+大瀑布+黄石公园14日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">13099</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/hglv4.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]巴西、阿根廷、秘鲁、智利经典23天深度游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">11999</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/hglv5.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[自由行]夏威夷欧胡岛6-7日半自助游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">12989</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/hglv6.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]美国东海岸+布法罗+波士顿12日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">22099</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                  北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/hglv7.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]美国东西海岸+夏威夷+黄石公园15晚18日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">23599</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     
+                     <li class="mr0">
+                       <div class="imgWrap">
+                          <img src="images/hglv8.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[自由行]美国东海岸13晚15日半自助游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">22999</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                    北京出发
+                               </div>
+                         </div>
+                       </div>
+                     </li> 
+                 </ul>
+                </div>
+            </div>
+            
+            <div  class="imgBlock clearfix">  <!--海岛-->
+              <div class="box">
+                 <img src="images/z8P4Sp.jpg">
+                 <a class="more" href="#">更多中海岛线路</a>
+                 <ul>
+                    <li>
+                       <div class="imgWrap">
+                          <img src="images/tglv1.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]普吉岛4晚6日半自助游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">5799</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     
+                      <li>
+                       <div class="imgWrap">
+                          <img src="images/tglv2.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[自由行]【一价全包】马尔代夫哈库拉岛5晚8日自助游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">4699</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     <li class="mr0">
+                       <div class="imgWrap">
+                          <img src="images/tglv3.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]普吉+甲米缤纷双岛5晚6日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">6099</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/tglv4.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[跟团]普吉+甲米缤纷双岛4晚5日游</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">4999</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/tglv5.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[自由行]马尔代夫曼德芙仕岛5晚8日自由行</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">12989</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/tglv6.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[自由行]马尔代夫瓦度岛5晚8日自由行</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">12099</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                  北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     <li>
+                       <div class="imgWrap">
+                          <img src="images/tglv7.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[自由行]马尔代夫蜜月岛5晚8日自由行</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">13599</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                   北京出发
+                              </div>
+                          </div>
+                       </div>
+                     </li>
+                     
+                     <li class="mr0">
+                       <div class="imgWrap">
+                          <img src="images/tglv8.jpg">
+                       </div>
+               		   <div class="text">
+                           <h4>[自由行]马尔代夫罗宾逊岛5晚8日自由行</h4>
+                       
+                          <div class="info">
+                              <div class="leftInfo">
+                                    <span class="unit">¥</span><span class="price">12999</span>起
+                              </div>
+                          
+                              <div class="rightInfo">
+                                    北京出发
+                               </div>
+                         </div>
+                       </div>
+                     </li>
+                 </ul>
+               </div>
+            </div>
+         </div>
+     </div>
+  </div>
+</div>
+
+<!--旅游合作局-->
+<div id="index-cooper">
+  <div class="wrap clearfix">
+    <h3>旅游局合作</h3>
+    <a>更多旅游局</a>
+    <div style="clear:both"></div>
+    <div class="box">
+       <ul class="clearfix">
+          <li>
+             <img src="images/AOCSU2.png.webp.jpg">
+              <a href="#">釜山观光公社</a>
+          </li>
+         <li>
+             <img src="images/mAHgw6.png.webp.jpg">
+              <a href="#">江苏省旅游局</a>
+          </li>
+          <li>
+             <img src="images/xxP9f4.png.webp.jpg">
+              <a href="#">南通旅游局</a>
+          </li>
+          <li>
+             <img src="images/iKzImP.png.webp.jpg">
+             <a href="#">岱山旅游局</a>
+          </li>
+          <li>
+             <img src="images/Zj9Eo2.png.webp.jpg">
+              <a href="#">四川旅游局</a>
+          </li>
+          <li>
+             <img src="images/FfKg0k.png.webp.jpg">
+              <a href="#">宜兴旅游局</a>
+          </li><li>
+             <img src="images/2nc7IM.jpg.webp.jpg">
+              <a href="#">溧水旅游局</a>
+          </li>
+          <li class="mr0">
+             <img src="images/y1Bzhf.png.webp.jpg">
+              <a href="#">梅州旅游局</a>
+          </li>
+          <li>
+             <img src="images/AZVabw.png.webp.jpg">
+             <a href="#">菲律宾旅游局</a>
+          </li>
+         <li>
+             <img src="images/O5Au5R.png.webp.jpg">
+              <a href="#">泰州旅游局</a>
+          </li>
+          <li>
+             <img src="images/eyLIXt.png.webp.jpg">
+              <a href="#">济宁旅游局</a>
+          </li>
+          <li>
+             <img src="images/S4C8R2.png.webp.jpg">
+              <a href="#">沂南旅游局</a>
+          </li>
+          <li>
+             <img src="images/maih9k.png.webp.jpg">
+              <a href="#">盐城旅游局</a>
+          </li>
+          <li>
+             <img src="images/QZotuD.png.webp.jpg">
+              <a href="#">昆山旅游局</a>
+          </li>
+          <li>
+             <img src="images/HlgjHD.png.webp.jpg">
+              <a href="#">临安旅游局</a>
+          </li>
+          <li class="mr0">
+             <img src="images/YUhOJl.png.webp.jpg">
+              <a href="#">福建旅游局</a>
+          </li>  
+       </ul>
+
+    </div>
+  
+  </div>
+</div>
+<!--广告图-->
+<div id="index-advert">
+  <div class="wrap">
+    <img src="images/ii7mhU.jpg">
+  </div>
+</div>
+<!--小红人-->
+<div id="redPeople">
+    <div class="red"></div>
+    <a class="close" href="javascript:;"></a>
+</div>
+
+<!--向上按钮-->
+<div id="goTop"></div>
+
+</html>

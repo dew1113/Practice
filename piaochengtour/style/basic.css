@@ -1,0 +1,528 @@
+@charset "utf-8";
+
+*{
+	margin: 0;
+	padding: 0;
+	
+}
+body {
+	background-color: #fff;
+	font-family: "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei UI", "Microsoft YaHei", SimHei, "\5B8B\4F53", simsun, sans-serif;
+	font-size:16px;
+	
+}
+div ,figure,figcaption,input,button{
+	box-sizing: border-box;
+}
+ul,ol {
+	list-style-type:none;
+}
+a {
+	text-decoration: none;
+}
+img{
+	display:block;
+	max-width:100%;
+	
+}
+.clearfix:after {
+	content: '.';
+	display: block;
+	clear: both;
+	height: 0;
+	visibility: hidden;
+}
+h2.none{
+	display:none;
+}
+.sm-visible{
+	display:none;
+}
+
+#header {
+	position:fixed;
+	top:0px;
+	z-index: 100;
+	width: 100%;
+	height: 70px;
+	background-color: #333;
+	box-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
+}
+#header .center {
+	max-width: 1263px;
+	height: 70px;
+	margin: 0 auto;
+}
+#header .logo {
+	width: 30%;
+	height: 70px;
+	background: url(../images/logo.png) no-repeat;
+	text-indent: -9999px;
+	float: left;
+}
+
+#header .link {
+	width: 55%;
+	height: 70px;
+	line-height: 70px;
+	color: #eee;
+	float: right;
+}
+#header .link li {
+	width:20%;
+	text-align: center;
+	float: left;
+}
+#header .link a {
+	display: block;
+	width: 100%;
+	color: #eee;
+}
+#header .link a:hover {
+    background-color: #000;
+}
+#header .link .active a {
+	background-color: #000;
+}
+#adver {
+	position:relative;
+	padding-top:70px;
+	max-width: 1920px;
+	margin: 0 auto;
+}
+#adver .center {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 40%;
+	height: 60px;
+	margin: -10px 0 0 -20%;
+	background-color: #000;
+	opacity: 0.6;
+	border-radius: 10px;
+}
+#adver .copy{
+	background-color:transparent;
+	opacity: 1;
+	padding:3px 3px 0 3px;
+	
+}
+#adver .search {
+	width: 70%;
+    height: 52px;
+    background-color: #eee;
+    color: #666;
+    border: 1px solid #666;
+    border-radius: 10px;
+    font-size: 24px;
+    padding: 0 10px;
+    outline: none;
+    display: block;
+    float: left;
+}
+#adver .button {
+	width: 30%;
+	height: 54px;
+	background-color: #eee;
+	color: #666;
+	font-weight: bold;
+	border: 1px solid #333;
+	border-left-width:3px;
+	border-radius: 10px;
+	font-size: 24px;
+	line-height:54px;
+	outline: none;
+	cursor: pointer;
+	display:block;
+	float:right;
+	
+}
+#footer {
+	margin-top:20px;
+	background-color: #222;
+	clear:both;
+	
+}
+#footer .version {
+	color: #777;
+	text-align: center;
+	padding: 10px 0;
+}
+#footer .top {
+	max-width: 1263px;
+	height: 281px;
+	margin: 0 auto;
+	text-align: center;
+}
+#footer .block {
+	width: 33.33%;
+	height: 280px;
+	display: block;
+	float:left;
+	color: #ccc;
+	vertical-align: top;
+	text-align: left;
+	
+}
+#footer h2 {
+	font-size: 24px;
+	font-weight: normal;
+	padding: 20px 0 10px 20px;
+}
+#footer hr {
+	margin-bottom:10px;
+	width: 90%;
+	border: 1px dashed #333;
+}
+#footer ul {
+	text-indent: 20px;
+	line-height: 2;
+}
+#footer ul>li>a{
+	font-size:18px;
+	color: #777;
+}
+#footer ul>li>a:hover{
+	color: #F90;
+}
+#footer .bottom {
+	padding:15px 0;
+	text-align: center;
+	color: #777;
+	background-color: #000;
+	border-top: 1px solid #444;
+}
+
+
+/*媒体查询，参考部分Bootstrap 框架*/
+/*当页面大于1200px 时，大屏幕，主要是PC 端*/
+@media (min-width: 1200px) {
+	
+	
+}
+/*在992 和1199 像素之间的屏幕里，中等屏幕，分辨率低的PC*/
+@media (min-width: 992px) and (max-width: 1199px) {
+	#adver .center {
+		width: 50%;
+		margin: -10px 0 0 -25%;
+    }
+	#tour .center h2 {
+	    font-size: 40px;
+    }
+	#headline h2 {
+		font-size: 38px;
+	}
+	#headline h3 {
+		font-size: 20px;
+	}
+	#container .sidebar {
+	    display:none;
+    }
+	#container .list {
+	    width:100%;
+		padding:0 20px;
+    }
+}
+/*在768 和991 像素之间的屏幕里，小屏幕，主要是PAD*/
+@media (min-width: 768px) and (max-width: 991px) {
+	#adver .center {
+		width: 60%;
+		margin: -10px 0 0 -30%;
+    }
+	#adver .search,#adver .button{
+		font-size:20px;
+	}
+	#tour .center h2 {
+	    font-size: 35px;
+    }
+	#headline h2 {
+		font-size: 30px;
+	}
+	#headline h3 {
+		font-size: 16px;
+	}
+	#container .sidebar {
+	    display:none;
+    }
+	#container .list {
+	    width:100%;
+		padding:0 20px;
+    }
+	#container .list h2 {
+		font-size: 28px;	
+	}
+	#container .about p {
+		font-size: 18px;
+	}
+    #container .about address {
+	    font-size: 18px;
+	}
+	#container .ticket .left,#container .ticket .right,#container .ticket .button {
+		width: 98%;
+		display: block;
+    }
+	#container .ticket .form input {
+		width: 98%;
+		height: 35px;
+		margin: 0;
+	}
+	#container .ticket .form p {
+		line-height: 2;
+	}
+	#container .ticket .submit {
+		display: block;
+		width: 30%;
+		height: auto;
+		line-height: 2;
+		position: static;
+		margin:10px auto;
+	}
+	#container.tour h2 {
+		font-size: 22px;
+    }
+	.md-hidden {
+		display:none;
+		
+	}
+	#container .tour h2 {
+		font-size: 25px;
+		padding: 2px 0 2px 25px;
+	}
+	#container .tour .buy {
+		position: absolute;
+		bottom:0;
+		top:auto;
+		right: auto;
+		padding: 0 0 0 25px;
+	}
+	
+}
+/*在480 和767 像素之间的屏幕里，超小屏幕，主要是手机*/
+@media (min-width: 480px) and (max-width: 767px) {
+	#header,#header .link ,#header .center {
+		height:45px;	
+	}
+	#header .link {
+		line-height:45px;
+		width: 100%;	
+	}
+	#header .logo,.sm-hidden,.md-hidden {
+		display:none;
+	}
+	#adver ,#headline{
+		padding-top:45px;
+	}
+	#adver .center {
+		width: 70%;
+		height:53px;
+		margin: -10px 0 0 -35%;
+    }
+	#adver .search,#adver .button{
+		font-size:18px;
+		height:45px;
+		line-height:45px;	
+	}
+	.version{
+		display:block;	
+	}
+	#tour .center h2 {
+	    font-size: 30px;
+    }
+	#tour .center p {
+		font-size:15px;
+	}
+	#tour figure {
+	    width: 49.2%;
+
+    }
+	#headline h2 {
+		font-size: 26px;
+	}
+	#headline h3 {
+		font-size: 14px;
+	}
+	#container .sidebar {
+	    display:none;
+    }
+	#container .list {
+	    width:100%;
+		padding:0 20px;
+    }
+	#container .list h2 {
+		font-size: 25px;	
+	}
+	#container .about p {
+		font-size: 15px;
+	}
+    #container .about address {
+	    font-size: 15px;
+	}
+	#container .scenery figure {
+	    width: 48.8%;
+    }
+	#container .ticket .left,#container .ticket .right,#container .ticket .button {
+		width: 98%;
+		display: block;
+    }
+	#container .ticket .form input {
+		width: 98%;
+		height: 35px;
+		margin: 0;
+	}
+	#container .ticket .form p {
+		line-height: 2;
+	}
+	#container .ticket .submit {
+		display: block;
+		width: 30%;
+		height: auto;
+		line-height: 2;
+		position: static;
+		margin:10px auto;
+	}
+	#container .ticket .type, #container .ticket .form, #container .ticket .new, #container .ticket .form input, #container .ticket .submit, #container .ticket .reserve ,#container .list .more {
+       font-size: 16px;
+    }
+	#container .tour h2 {
+		font-size: 16px;
+		height:20px;
+		padding: 5px 0 10px 15px;
+	}
+	#container .tour h3 {
+		font-size: 14px;
+		padding: 5px 0 5px 15px;
+	}
+	#container .tour .price  strong,#container .tour .price s {
+		font-size: 18px;
+	}
+	#container .tour .buy {
+		position: absolute;
+		bottom:0;
+		top:auto;
+		right: auto;
+		padding: 0 0 0 15px;
+	}
+	 
+
+
+}
+/*在小于480 像素的屏幕，微小屏幕，更低分辨率的手机*/
+@media (max-width: 479px) {
+	#header,#header .link ,#header .center {
+		height:45px;	
+	}
+	#header .link {
+		line-height:45px;
+		width: 100%;	
+	}
+	#header .logo,.sm-hidden,.xs-hidden,.md-hidden{
+		display:none;
+	}
+	#header .link {.
+	    width: 100%;
+	}
+	#header .link li{
+	    width:25%;	
+	}
+	#adver ,#headline{
+	    padding-top:45px;
+	}
+	#adver .center {
+		width: 80%;
+		margin: -10px 0 0 -40%;
+		height:48px;
+    }
+	#adver .search,#adver .button{
+		font-size:16px;
+		height:40px;
+		line-height:40px;	
+	}
+	.version{
+		display:block;	
+	}
+	#tour .center h2 {
+	    font-size: 26px;
+    }
+	#tour .center p {
+		font-size:14px;
+	}
+	#tour figure {
+	    width: 99%;
+    }
+	#headline h2 {
+		font-size: 20px;
+	}
+	#headline h3 {
+		font-size: 12px;
+	}
+	#container .sidebar {
+	    display:none;
+    }
+	#container .list {
+	    width:100%;
+		padding:0 20px;
+    }
+	#container .list h2 {
+		font-size: 22px;	
+	}
+	#container .about p {
+		font-size: 14px;
+	}
+    #container .about address {
+	    font-size: 14px;
+	}
+	#container .scenery figure {
+	    width: 99%;
+    }
+	#container .ticket .left,#container .ticket .right,#container .ticket .button {
+		width: 98%;
+		display: block;
+    }
+	#container .ticket .form input {
+		width: 98%;
+		height: 35px;
+		margin: 0;
+	}
+	#container .ticket .form p {
+		line-height: 2;
+	}
+	#container .ticket .submit {
+		display: block;
+		width: 30%;
+		height: auto;
+		line-height: 2;
+		position: static;
+		margin:10px auto;
+	}
+	#container .ticket .type, #container .ticket .form, #container .ticket .new, #container .ticket .form input, #container .ticket .submit, #container .ticket .reserve,#container .list .more  {
+       font-size: 14px;
+    }
+	#container .ticket .reserve {
+		display: inline-block;
+		width: auto;
+		height: auto;
+		padding: 8px;
+		line-height: 1;
+	}
+	#container .tour h2 {
+		font-size: 18px;
+		padding: 0 0 0 10px;
+	}
+	#container .tour h3 {
+		font-size: 14px;
+		padding: 5px 0 5px 15px;
+		height: 15px;
+		overflow: hidden;
+	}
+	#container .tour .price  strong,#container .tour .price ,#container .tour .price s{
+		font-size: 18px;
+	}
+	#container .tour .buy {
+		position: absolute;
+		bottom:0;
+		top:auto;
+		right: auto;
+		padding: 0 0 0 10px;
+	}
+ 
+}
